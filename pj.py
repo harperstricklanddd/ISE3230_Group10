@@ -28,7 +28,7 @@ values = df[value_cols].apply(pd.to_numeric, errors='coerce')
 
 value_cols = df.columns[1:]
 
-values = values.iloc[:16, :9]
+values = values.iloc[:18, :9]
 if not np.isfinite(values.to_numpy()).all():
     raise ValueError("Numeric data still has NaN/Inf; please clean the CSV.")
 
@@ -42,8 +42,7 @@ P = {}
 for i in rounds:            
     for j in positions:     
         P[(i, j)] = float(values.iloc[i - 1, j - 1])
-        print(P[i,j])
-
+        print(P[(i, j)])
 
 
 m = gp.Model("Fantasy_Baseball_Draft_Optimization")
@@ -60,59 +59,50 @@ m.setObjective(
 # Constraints
 # -----------------------------
 
+# Draft constraint
 for i in rounds:
-    m.addConstr(
-        gp.quicksum(X[i, j] for j in positions) == 1,
-        name=f"OnePickPerRound_{i}"
-    )
+    m.addConstr(gp.quicksum(X[i, j] for j in positions) == 1)
 
+# Infield and catcher
 for j in range(1, 6):
-    m.addConstr(
-        gp.quicksum(X[i, j] for i in rounds) >= 1,
-        name=f"MinPos_{j}"
-    )
-    m.addConstr(
-        gp.quicksum(X[i, j] for i in rounds) <= 3,
-        name=f"MaxPos_{j}"
-    )
+    m.addConstr(gp.quicksum(X[i, j] for i in rounds) >= 1)
+    m.addConstr(gp.quicksum(X[i, j] for i in rounds) <= 3)
 
-m.addConstr(
-    gp.quicksum(X[i, 6] for i in rounds) >= 3,
-    name="OF_Min"
-)
-m.addConstr(
-    gp.quicksum(X[i, 6] for i in rounds) <= 5,
-    name="OF_Max"
-)
+# Outfield
+m.addConstr(gp.quicksum(X[i, 6] for i in rounds) >= 3)
+m.addConstr(gp.quicksum(X[i, 6] for i in rounds) <= 5)
 
-m.addConstr(
-    gp.quicksum(X[i, j] for i in rounds for j in range(1, 8)) == 10,
-    name="TotalHitters"
-)
+# Designated hitter
+m.addConstr(gp.quicksum(X[i, 7] for i in rounds) >= 0)
+m.addConstr(gp.quicksum(X[i, 7] for i in rounds) <= 2)
 
+# Total position players
 m.addConstr(
-    gp.quicksum(X[i, 8] for i in rounds) >= 2,
-    name="SP_Min"
-)
-m.addConstr(
-    gp.quicksum(X[i, 8] for i in rounds) <= 6,
-    name="SP_Max"
+    gp.quicksum(X[i, 1] for i in rounds) +
+    gp.quicksum(X[i, 2] for i in rounds) +
+    gp.quicksum(X[i, 3] for i in rounds) +
+    gp.quicksum(X[i, 4] for i in rounds) +
+    gp.quicksum(X[i, 5] for i in rounds) +
+    gp.quicksum(X[i, 6] for i in rounds) +
+    gp.quicksum(X[i, 7] for i in rounds) 
+    == 10
 )
 
-m.addConstr(
-    gp.quicksum(X[i, 9] for i in rounds) >= 2,
-    name="RP_Min"
-)
-m.addConstr(
-    gp.quicksum(X[i, 9] for i in rounds) <= 6,
-    name="RP_Max"
-)
+# Starting pitchers
+m.addConstr(gp.quicksum(X[i, 8] for i in rounds) >= 2)
+m.addConstr(gp.quicksum(X[i, 8] for i in rounds) <= 6)
 
+# Bullpen pitchers
+m.addConstr(gp.quicksum(X[i, 9] for i in rounds) >= 2)
+m.addConstr(gp.quicksum(X[i, 9] for i in rounds) <= 6)
+
+# Total pitchers
 m.addConstr(
     gp.quicksum(X[i, 8] for i in rounds) +
-    gp.quicksum(X[i, 9] for i in rounds) == 8,
-    name="TotalPitchers"
+    gp.quicksum(X[i, 9] for i in rounds) 
+    == 8
 )
+
 #------------------
 #End Constraints
 #------------------
@@ -128,3 +118,4 @@ if m.status == GRB.OPTIMAL:
                 print(f"  Round {i}: {pos_names[j]} (X[{i},{j}] = 1)")
 else:
     print("No optimal solution found. Model status:", m.status)
+print(rounds)
