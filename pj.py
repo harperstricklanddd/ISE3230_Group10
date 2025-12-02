@@ -2,7 +2,7 @@ import gurobipy as gp
 from gurobipy import GRB
 import pandas as pd
 
-csv_file_path = 'ISE3230\Project\Fantasy Baseball Stats.csv'
+csv_file_path = 'Data\Fantasy Baseball Stats.csv'
 df = pd.read_csv(csv_file_path)
 print(df.head())
 
