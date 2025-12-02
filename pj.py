@@ -92,6 +92,9 @@ m.addConstr(
     == 8,
     name="TotalPitchers"
 )
+#------------------
+#End Constraints
+#------------------
 
 m.optimize()
 
