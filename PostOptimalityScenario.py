@@ -1,4 +1,4 @@
-# has Zach's original analysis (with added constraint names for SP and RP so that they could be adjusted) and then different scenario analysis is added on the bottom (line 132)
+# has Zach's original analysis (with added constraint names for SP and RP so that they could be adjusted) and then different scenario analysis is added on the bottom (line 131)
 
 import gurobipy as gp
 from gurobipy import GRB
