@@ -42,7 +42,6 @@ P = {}
 for i in rounds:            
     for j in positions:     
         P[(i, j)] = float(values.iloc[i - 1, j - 1])
-        print(P[(i, j)])
 
 
 m = gp.Model("Fantasy_Baseball_Draft_Optimization")
@@ -118,4 +117,3 @@ if m.status == GRB.OPTIMAL:
                 print(f"  Round {i}: {pos_names[j]} (X[{i},{j}] = 1)")
 else:
     print("No optimal solution found. Model status:", m.status)
-print(rounds)
