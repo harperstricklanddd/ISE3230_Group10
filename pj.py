@@ -63,7 +63,7 @@ for i in rounds:
     m.addConstr(gp.quicksum(X[i, j] for j in positions) == 1)
 
 # Infield and catcher
-for j in range(1, 6):
+for j in range(1, 5):
     m.addConstr(gp.quicksum(X[i, j] for i in rounds) >= 1)
     m.addConstr(gp.quicksum(X[i, j] for i in rounds) <= 3)
 
