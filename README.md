@@ -17,6 +17,6 @@ FabricatedData1B.csv is a CSV file with the data for the the run of our model wi
 
 Fantasy Baseball Stats.csv is a CSV file with the raw data that has player names, positions, average draft position, and fantasty points for the 2025 season. 
 
-PositionRoundAverages.csv is a CSV file with the cleaned and organized data from Fantasy Baseball Stats.csv. It has the average fantasty points for position per round drafted.
+PositionRoundAverages.csv is a CSV file with the cleaned and organized data from Fantasy Baseball Stats.csv. It has the average fantasty points per position per round drafted.
 
 Post Optimality Analysis Data.pdf is a PDF file that has the data for the sensitivty post optimality analysis. 
