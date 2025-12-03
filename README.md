@@ -1,5 +1,7 @@
 # ISE3230_Group10
-Final Project for ISE 3230
+
+# Final Project for ISE 3230
+
 Julianna Hahn, Michael Harmeyer, Zach Petros, Harper Strickland
 
 PostOptimalityAnalysis.py is a Python file that analyzes the reduced costs when relaxing the model. 
@@ -10,7 +12,7 @@ fabdata.py is a Python file with fabricated data to test our model with other da
 
 pj.py is a Python file that has the math program creating our model and optimizing it. 
 
-Data Folder
+The following files are inside of the data folder: 
 
 FabricatedData1B.csv is a CSV file with the data for the the run of our model with fabricated data.
 
