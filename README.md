@@ -1,6 +1,5 @@
-# ISE3230_Group10
 
-## Final Project for ISE 3230
+# Final Project for ISE 3230 - Group 10
 
 ### Julianna Hahn, Michael Harmeyer, Zach Petros, Harper Strickland
 
