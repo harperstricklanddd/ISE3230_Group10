@@ -1,5 +1,8 @@
 # Was pasted into main project file
 
+lp = m.relax()
+lp.optimize()
+
 print("\n--- SENSITIVITY ANALYSIS (LP Relaxation) ---\n")
 
 # Dual values for constraints
