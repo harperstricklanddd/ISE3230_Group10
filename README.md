@@ -1,8 +1,8 @@
 # ISE3230_Group10
 
-# Final Project for ISE 3230
+## Final Project for ISE 3230
 
-Julianna Hahn, Michael Harmeyer, Zach Petros, Harper Strickland
+### Julianna Hahn, Michael Harmeyer, Zach Petros, Harper Strickland
 
 PostOptimalityAnalysis.py is a Python file that analyzes the reduced costs when relaxing the model. 
 
